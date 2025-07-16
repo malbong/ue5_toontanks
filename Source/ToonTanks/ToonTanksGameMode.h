@@ -19,10 +19,20 @@ public:
 
 	void ActorDied(AActor *DeadActor);
 
+	UFUNCTION(BlueprintImplementableEvent, meta = (AllowAccessPrivate = "true"))
+	void GameStart();
+
+	UFUNCTION(BlueprintImplementableEvent, meta = (AllowAccessPrivate = "true"))
+	void GameOver(bool bWon);
+
 protected:
 	virtual void BeginPlay() override;
 
 private:
 	class ATank *TankPlayer;
 	class AToonTanksPlayerController *TankPlayerController;
+
+	int32 CurrentTowerCount = 0;
+
+	int32 GetTowerCount() const;
 };

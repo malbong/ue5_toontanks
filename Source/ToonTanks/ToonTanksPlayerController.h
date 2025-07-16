@@ -17,11 +17,6 @@ class TOONTANKS_API AToonTanksPlayerController : public APlayerController
 public:
 	AToonTanksPlayerController();
 
-protected:
-	virtual void BeginPlay() override;
-
 public:
 	void SetEnabledInput(bool bEnable);
-
-	AActor *TankPlayer;
 };

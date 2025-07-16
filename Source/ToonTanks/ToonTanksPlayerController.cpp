@@ -6,26 +6,19 @@ AToonTanksPlayerController::AToonTanksPlayerController()
 {
 }
 
-void AToonTanksPlayerController::BeginPlay()
-{
-    TankPlayer = GetPawn();
-}
-
 void AToonTanksPlayerController::SetEnabledInput(bool bEnable)
 {
+    AActor *TankPlayer = GetPawn();
+    if (!TankPlayer)
+        return;
+
     if (bEnable)
     {
-        if (TankPlayer)
-        {
-            TankPlayer->EnableInput(this);
-        }
+        TankPlayer->EnableInput(this);
     }
     else
     {
-        if (TankPlayer)
-        {
-            TankPlayer->DisableInput(this);
-        }
+        TankPlayer->DisableInput(this);
     }
 
     bShowMouseCursor = bEnable;
