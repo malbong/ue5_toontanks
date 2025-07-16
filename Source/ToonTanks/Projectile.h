@@ -23,6 +23,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent *HitComponent,
+			   AActor *OtherActor,
+			   UPrimitiveComponent *OtherComp,
+			   FVector NormalImpulse,
+			   const FHitResult &HitResult);
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent *ProjectileMesh;
@@ -32,4 +39,16 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float Speed = 1500.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+	float Damage = 50.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+	class UParticleSystem *HitParticle;
+
+	UPROPERTY(EditDefaultsOnly)
+	class UParticleSystemComponent *TrailParticle;
+
+	UPROPERTY(EditDefaultsOnly)
+	class USoundBase *ProjectileSound;
 };

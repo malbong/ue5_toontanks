@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "Projectile.h"
+#include "Health.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -23,6 +24,8 @@ ABasePawn::ABasePawn()
 
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
+
+	Health = CreateDefaultSubobject<UHealth>(TEXT("Health"));
 }
 
 void ABasePawn::RotateTurret(FVector LookAt)
@@ -49,4 +52,11 @@ void ABasePawn::Fire()
 		SpawnedProjectile->SetOwner(this);
 		SpawnedProjectile->SetInstigator(this);
 	}
+}
+
+void ABasePawn::HandleDestroy()
+{
+	UGameplayStatics::PlaySoundAtLocation(this, DestroySound, GetActorLocation());
+
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DestroyParticle, GetActorLocation(), GetActorRotation());
 }

@@ -22,6 +22,8 @@ void ATank::BeginPlay()
     Super::BeginPlay();
 
     PlayerController = Cast<APlayerController>(GetController());
+
+    bAlive = true;
 }
 
 void ATank::Tick(float DeltaTime)
@@ -47,6 +49,16 @@ void ATank::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
     PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
 
     PlayerInputComponent->BindAction(TEXT("Fire"), EInputEvent::IE_Pressed, this, &ATank::Fire);
+}
+
+void ATank::HandleDestroy()
+{
+    Super::HandleDestroy();
+
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+
+    bAlive = false;
 }
 
 void ATank::MoveForward(float Value)

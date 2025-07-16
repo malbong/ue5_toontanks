@@ -22,7 +22,9 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 
-	APawn *TankPlayer;
+	void HandleDestroy();
+
+	class ATank *TankPlayer;
 
 	UPROPERTY(EditDefaultsOnly)
 	float FireRange = 700.0f;

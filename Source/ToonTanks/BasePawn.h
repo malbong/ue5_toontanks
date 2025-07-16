@@ -19,6 +19,9 @@ protected:
 	void RotateTurret(FVector LookAt);
 	void Fire();
 
+public:
+	void HandleDestroy();
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	class UCapsuleComponent *CapsuleComp;
@@ -37,4 +40,12 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AProjectile> ProjectileClassType;
+
+	class UHealth *Health;
+
+	UPROPERTY(EditDefaultsOnly)
+	class USoundBase *DestroySound;
+
+	UPROPERTY(EditDefaultsOnly)
+	class UParticleSystem *DestroyParticle;
 };

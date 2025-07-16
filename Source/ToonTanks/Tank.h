@@ -25,6 +25,10 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 
+	void HandleDestroy();
+
+	inline bool IsAlive() const { return bAlive; }
+
 private:
 	void MoveForward(float Value);
 	void Turn(float Value);
@@ -42,4 +46,6 @@ private:
 	float TurnRate = 90.0f;
 
 	class APlayerController *PlayerController;
+
+	bool bAlive = false;
 };
