@@ -29,6 +29,13 @@ public:
 
 	inline bool IsAlive() const { return bAlive; }
 
+	UFUNCTION()
+	void TakenDamage(AActor *DamagedActor,
+					 float Damage,
+					 const class UDamageType *DamageType,
+					 class AController *InstigatedBy,
+					 AActor *DamageCauser);
+
 private:
 	void MoveForward(float Value);
 	void Turn(float Value);
@@ -48,4 +55,7 @@ private:
 	class APlayerController *PlayerController;
 
 	bool bAlive = false;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UCameraShakeBase> OnHitCameraShakeClassType;
 };

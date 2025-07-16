@@ -24,6 +24,8 @@ void ATank::BeginPlay()
     PlayerController = Cast<APlayerController>(GetController());
 
     bAlive = true;
+
+    OnTakeAnyDamage.AddDynamic(this, &ATank::TakenDamage);
 }
 
 void ATank::Tick(float DeltaTime)
@@ -59,6 +61,18 @@ void ATank::HandleDestroy()
     SetActorTickEnabled(false);
 
     bAlive = false;
+}
+
+void ATank::TakenDamage(AActor *DamagedActor,
+                        float Damage,
+                        const class UDamageType *DamageType,
+                        class AController *InstigatedBy,
+                        AActor *DamageCauser)
+{
+    if (PlayerController)
+    {
+        PlayerController->ClientStartCameraShake(OnHitCameraShakeClassType);
+    }
 }
 
 void ATank::MoveForward(float Value)
